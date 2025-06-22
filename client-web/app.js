@@ -1,10 +1,7 @@
-// Gullak Pro Web Frontend
-// Assumes Aptos wallet extension injects window.aptos
-
 const CONTRACT_ADDRESS = "0x8fdc05f62b24f7e21c7f3e64666f4012813edeafffce50757775d837e11b6d47"; // Update if needed
 const MODULE_NAME = "piggy_bank";
 
-// DOM Elements
+
 const connectBtn = document.getElementById('connectBtn');
 const walletAddressEl = document.getElementById('wallet-address');
 const statusEl = document.getElementById('status');
@@ -204,16 +201,16 @@ window.onload = async () => {
         userAccount = await window.aptos.account();
         walletAddressEl.textContent = userAccount.address;
         walletAddressEl.classList.remove('hidden');
-        // Always check for piggybank and show dashboard if exists
+        
         if (await checkPiggyBank()) {
           switchView(dashboardView);
           updateDashboard();
         } else {
-          // If not, prompt to create only on first login
+          
           switchView(createPiggyView);
         }
       } else {
-        // Not connected, show connect wallet view
+        
         switchView(walletDisconnectedView);
       }
     } catch {

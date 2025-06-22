@@ -31,6 +31,23 @@ PiggyB is a decentralized savings dApp built on the Aptos blockchain. It allows 
 - Modern responsive web interface
 - Connects to Aptos wallets via `window.aptos` API
 
+## Project Structure
+
+```
+/Move.toml                # Move project config
+/sources/                 # Move smart contract source code
+/client/                  # Chrome extension frontend
+/client-web/              # Web app frontend
+/build/                   # Compiled contract artifacts
+/tests/                   # (Optional) Test scripts
+```
+
+## Requirements
+
+- Aptos wallet browser extension (e.g., Petra, Martian)
+- Node.js (for contract deployment, if needed)
+- Aptos CLI (for contract deployment)
+
 ## Getting Started
 
 ### 1. Deploy the Smart Contract
@@ -49,27 +66,82 @@ PiggyB is a decentralized savings dApp built on the Aptos blockchain. It allows 
 - Open `client-web/index.html` in your browser (with an Aptos wallet extension installed).
 - Connect your wallet and interact with your piggy bank.
 
-## Requirements
+## Setup
 
-- Aptos wallet browser extension (e.g., Petra, Martian)
-- Node.js (for contract deployment, if needed)
-- Aptos CLI (for contract deployment)
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/vineetmishra237/piggyB.git
+   cd piggyB
+   ```
+2. Install dependencies for contract development (if needed):
+   ```bash
+   # For Move CLI
+   aptos move compile
+   # For frontend (optional, if you want to use npm tooling)
+   cd client-web
+   npm install # if you add npm-based tooling
+   ```
+3. Deploy the Move contract to Aptos testnet/mainnet:
+   ```bash
+   aptos move publish --profile default
+   ```
+4. Update the contract address in `client/popup.js` and `client-web/app.js`.
 
-## File Structure
+## Interacting with the Contract
 
-```
-/Move.toml
-/sources/           # Move smart contract
-/client/            # Chrome extension frontend
-/client-web/        # Web app frontend
-/build/             # Compiled contract artifacts
-/tests/             # (Optional) Test scripts
-```
+- Use the Chrome extension (`client/`) or web app (`client-web/`) to interact with your PiggiB.
+- Supported actions:
+  - Create your PiggiB (one per user)
+  - Deposit APT
+  - Withdraw APT (if unlocked)
+  - Break PiggiB (withdraw all and close)
+  - Emergency withdraw all
+  - View your goal, balance, and progress
 
-## Security & Disclaimer
+## Example Workflow
 
-- Always test on Aptos testnet before using on mainnet.
-- Review and audit the smart contract before depositing significant funds.
+Below is an example workflow for using the PiggiB Move contract. Replace `<deployed_address>` with your actual contract address and provide the required arguments as needed.
+
+1. **Create Your PiggiB (Piggy Bank)** (run once per user):
+   ```bash
+   aptos move run --function-id '<deployed_address>::piggy_bank::create_piggy_bank' --args <goal_amount_in_octas> <lock_duration_seconds>
+   ```
+   - `<goal_amount_in_octas>`: Your savings goal in Octas (1 APT = 100,000,000 Octas)
+   - `<lock_duration_seconds>`: Lock duration in seconds (0 for no lock)
+
+2. **Deposit Funds:**
+   ```bash
+   aptos move run --function-id '<deployed_address>::piggy_bank::deposit' --args <amount_in_octas>
+   ```
+   - `<amount_in_octas>`: Amount to deposit in Octas
+
+3. **Withdraw Funds:**
+   ```bash
+   aptos move run --function-id '<deployed_address>::piggy_bank::withdraw' --args <amount_in_octas>
+   ```
+   - `<amount_in_octas>`: Amount to withdraw in Octas (must be unlocked and have sufficient balance)
+
+4. **Break PiggiB (Withdraw All & Close):**
+   ```bash
+   aptos move run --function-id '<deployed_address>::piggy_bank::break_piggy_bank'
+   ```
+
+5. **Emergency Withdraw All:**
+   ```bash
+   aptos move run --function-id '<deployed_address>::piggy_bank::emergency_withdraw_all'
+   ```
+
+6. **View PiggiB Info:**
+   ```bash
+   aptos move view --function-id '<deployed_address>::piggy_bank::get_piggy_bank_info' --args <user_address>
+   ```
+   - Returns: (balance, goal_amount, created_at, last_deposit_at, is_locked, unlock_time, deposit_count)
+
+7. **Check if PiggiB Exists:**
+   ```bash
+   aptos move view --function-id '<deployed_address>::piggy_bank::piggy_bank_exists' --args <user_address>
+   ```
+   - Returns: true/false
 
 ## License
 

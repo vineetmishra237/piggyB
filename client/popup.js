@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- CONFIGURATION ---
+    
     const CONTRACT_ADDRESS = "0x8fdc05f62b24f7e21c7f3e64666f4012813edeafffce50757775d837e11b6d47";
     const MODULE_NAME = "piggy_bank";
 
-    // --- DOM Elements ---
-    // (DOM element definitions are the same as before)
+    
+    
     const connectBtn = document.getElementById('connectBtn');
     const walletAddressEl = document.getElementById('wallet-address');
     const statusEl = document.getElementById('status');
@@ -26,10 +26,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const emergencyBtn = document.getElementById('emergencyBtn');
 
 
-    // --- State ---
+    
     let userAccount = null;
 
-    // --- Helper Functions ---
+    
     const toApt = (octas) => Number(BigInt(octas)) / 10 ** 8;
     const toOctas = (apt) => Math.floor(Number(apt) * 10 ** 8);
 
@@ -48,13 +48,13 @@ document.addEventListener('DOMContentLoaded', () => {
         view.classList.remove('hidden');
     };
 
-    // --- NEW: Message Passing Helper ---
+    
     const sendMessage = (message) => {
         return new Promise((resolve, reject) => {
             chrome.runtime.sendMessage(message, (response) => {
                 if (chrome.runtime.lastError) {
-                    // This can happen if the content script is not injected yet.
-                    // Guide user to refresh the page.
+                    
+                    
                     reject(new Error("Gullak bridge not ready. Please refresh the web page and try again."));
                 } else if (response && response.success) {
                     resolve(response);
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
     
-    // --- Core Logic ---
+    
     const updateDashboard = async () => {
         if (!userAccount) return;
         try {
@@ -145,9 +145,9 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const txResponse = await sendMessage({ type: 'SIGN_AND_SUBMIT', payload });
             // The popup can't wait for the transaction, but we can assume success on submission
-            // For a production app, you would poll the transaction hash: txResponse.response.hash
+            
             setStatus(successMessage);
-            // Give the blockchain a moment to update before refreshing UI
+            
             setTimeout(() => {
                 if (successMessage.includes("broken")) {
                     renderApp(); // Full re-render if account is closed
@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
     
-    // --- Event Listeners ---
+    
     connectBtn.addEventListener('click', async () => {
         try {
             const connectResponse = await sendMessage({ type: 'CONNECT' });
@@ -235,7 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
         await handleTransaction(payload, "Emergency withdrawal successful!");
     });
 
-    // --- Initialization ---
+    
     const init = async () => {
         try {
             const isConnectedResponse = await sendMessage({ type: 'IS_CONNECTED' });
@@ -247,7 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 switchView(walletDisconnectedView);
             }
         } catch (error) {
-            // This happens if the content script isn't ready. Show connect button.
+            
             console.warn(error.message);
             switchView(walletDisconnectedView);
         }
