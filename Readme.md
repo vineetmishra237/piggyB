@@ -78,19 +78,25 @@ MIT
 ---
 
 Testnet Account
-0x8fdc05f62b24f7e21c7f3e64666f4012813edeafffce50757775d837e11b6d47
 
-Transaction submitted: https://explorer.aptoslabs.com/txn/0xac83b777717e32e20528a2c092840cc0d7556ee9ecbe4effe65469fc6aef67dc?network=testnet
+```
+0x8fdc05f62b24f7e21c7f3e64666f4012813edeafffce50757775d837e11b6d47
+```
+
+Transaction submitted: [View on Aptos Explorer](https://explorer.aptoslabs.com/txn/0xac83b777717e32e20528a2c092840cc0d7556ee9ecbe4effe65469fc6aef67dc?network=testnet)
+
+```json
 {
-"Result": {
-"transaction_hash": "0xac83b777717e32e20528a2c092840cc0d7556ee9ecbe4effe65469fc6aef67dc",
-"gas_used": 3613,
-"gas_unit_price": 100,
-"sender": "8fdc05f62b24f7e21c7f3e64666f4012813edeafffce50757775d837e11b6d47",
-"sequence_number": 0,
-"success": true,
-"timestamp_us": 1750534247438934,
-"version": 6791030047,
-"vm_status": "Executed successfully"
+  "Result": {
+    "transaction_hash": "0xac83b777717e32e20528a2c092840cc0d7556ee9ecbe4effe65469fc6aef67dc",
+    "gas_used": 3613,
+    "gas_unit_price": 100,
+    "sender": "8fdc05f62b24f7e21c7f3e64666f4012813edeafffce50757775d837e11b6d47",
+    "sequence_number": 0,
+    "success": true,
+    "timestamp_us": 1750534247438934,
+    "version": 6791030047,
+    "vm_status": "Executed successfully"
+  }
 }
-}
+```
