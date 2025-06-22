@@ -204,13 +204,22 @@ window.onload = async () => {
         userAccount = await window.aptos.account();
         walletAddressEl.textContent = userAccount.address;
         walletAddressEl.classList.remove('hidden');
+        // Always check for piggybank and show dashboard if exists
         if (await checkPiggyBank()) {
           switchView(dashboardView);
           updateDashboard();
         } else {
+          // If not, prompt to create only on first login
           switchView(createPiggyView);
         }
+      } else {
+        // Not connected, show connect wallet view
+        switchView(walletDisconnectedView);
       }
-    } catch {}
+    } catch {
+      switchView(walletDisconnectedView);
+    }
+  } else {
+    switchView(walletDisconnectedView);
   }
 };

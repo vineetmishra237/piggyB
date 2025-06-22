@@ -3,22 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gullak</title>
+  <title>PiggiB Web</title>
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="./favicon.png">
 </head>
 <body>
   <div class="container">
     <header>
-      <h1>Gullak 🐷</h1>
+      <h1>PiggiB</h1>
       <p id="wallet-address" class="hidden"></p>
     </header>
     <main>
       <section id="wallet-disconnected">
-        <p>Please connect your Aptos wallet to begin.</p>
+        <p>Welcome to <b>PiggiB</b>! Connect your Aptos wallet to start saving in your digital piggy bank.</p>
         <button id="connectBtn">Connect Wallet</button>
       </section>
       <section id="create-piggy-view" class="hidden">
-        <h2>Create Your Piggy Bank</h2>
+        <h2>Create Your PiggiB</h2>
         <div class="form-group">
           <label for="goalAmount">Savings Goal (APT)</label>
           <input type="number" id="goalAmount" placeholder="e.g., 10">
@@ -27,7 +29,7 @@
           <label for="lockDuration">Lock for (Days)</label>
           <input type="number" id="lockDuration" placeholder="0 for no lock">
         </div>
-        <button id="createBtn">Create Gullak</button>
+        <button id="createBtn">Create PiggiB</button>
       </section>
       <section id="dashboard-view" class="hidden">
         <div class="stat-card">
@@ -45,7 +47,7 @@
         <div class="action-section">
           <h4>Deposit Funds</h4>
           <input type="number" id="depositAmount" placeholder="Amount in APT">
-          <button id="depositBtn">Save to Gullak</button>
+          <button id="depositBtn">Save to PiggiB</button>
         </div>
         <hr>
         <div class="action-section">
@@ -56,7 +58,7 @@
         <hr>
         <div class="action-section danger-zone">
           <h4>Danger Zone</h4>
-          <button id="breakBtn" class="btn-danger">Break Gullak (Close Account)</button>
+          <button id="breakBtn" class="btn-danger">Break PiggiB (Close Account)</button>
           <button id="emergencyBtn" class="btn-warning">Emergency Withdraw All</button>
         </div>
       </section>
