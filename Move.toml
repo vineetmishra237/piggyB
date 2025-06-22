@@ -1,0 +1,15 @@
+[package]
+name = "piggyB"
+version = "1.0.0"
+authors = []
+
+[addresses]
+gullak = '0x8fdc05f62b24f7e21c7f3e64666f4012813edeafffce50757775d837e11b6d47'
+[dev-addresses]
+
+[dependencies.AptosFramework]
+git = "https://github.com/aptos-labs/aptos-framework.git"
+rev = "mainnet"
+subdir = "aptos-framework"
+
+[dev-dependencies]

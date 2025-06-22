@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gullak</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Gullak 🐷</h1>
+      <p id="wallet-address" class="hidden"></p>
+    </header>
+    <main>
+      <section id="wallet-disconnected">
+        <p>Please connect your Aptos wallet to begin.</p>
+        <button id="connectBtn">Connect Wallet</button>
+      </section>
+      <section id="create-piggy-view" class="hidden">
+        <h2>Create Your Piggy Bank</h2>
+        <div class="form-group">
+          <label for="goalAmount">Savings Goal (APT)</label>
+          <input type="number" id="goalAmount" placeholder="e.g., 10">
+        </div>
+        <div class="form-group">
+          <label for="lockDuration">Lock for (Days)</label>
+          <input type="number" id="lockDuration" placeholder="0 for no lock">
+        </div>
+        <button id="createBtn">Create Gullak</button>
+      </section>
+      <section id="dashboard-view" class="hidden">
+        <div class="stat-card">
+          <h3>Balance</h3>
+          <p id="balance" class="big-text">0.0 APT</p>
+        </div>
+        <div class="progress-section">
+          <div id="goal-text">Goal: 0 of 0 APT</div>
+          <div class="progress-bar-container">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+        </div>
+        <div id="lock-status" class="status-box hidden"></div>
+        <hr>
+        <div class="action-section">
+          <h4>Deposit Funds</h4>
+          <input type="number" id="depositAmount" placeholder="Amount in APT">
+          <button id="depositBtn">Save to Gullak</button>
+        </div>
+        <hr>
+        <div class="action-section">
+          <h4>Withdraw Funds</h4>
+          <input type="number" id="withdrawAmount" placeholder="Amount in APT">
+          <button id="withdrawBtn">Withdraw</button>
+        </div>
+        <hr>
+        <div class="action-section danger-zone">
+          <h4>Danger Zone</h4>
+          <button id="breakBtn" class="btn-danger">Break Gullak (Close Account)</button>
+          <button id="emergencyBtn" class="btn-warning">Emergency Withdraw All</button>
+        </div>
+      </section>
+      <p id="status" class="status-message"></p>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
